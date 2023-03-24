@@ -48,11 +48,11 @@ function game(){
     let scorePlayer = 0;
     let scoreComputer = 0;
     let gamesTied = 0;
-    for(var i=1; i<=5; i++){  
+    let winner = false;
+    while(winner == false){  
         let computerSelection = getComputerChoice();
         playerSelection = prompt('What do you choose?');
         playRound(playerSelection, computerSelection);
-        console.log(playRound(playerSelection, computerSelection));
         let outcome = playRound(playerSelection, computerSelection);
         let gameResult = 0;
         if(outcome == 'Draw! Rock ties Rock'){
@@ -91,8 +91,18 @@ function game(){
         if(gameResult == 1){
             scorePlayer++;
         }
+        if(scorePlayer == 5){
+            console.log('You Win!')
+            winner = true;
+            break;
+        }
+        if(scoreComputer == 5){
+            console.log('You Lose!')
+            winner = true;
+            break;
+        }
         let gameScore = ('Your score is '+ scorePlayer + ' wins, ' + gamesTied + ' ties, and ' + scoreComputer + ' losses');
-        console.log(gameResult);
+        console.log(playRound(playerSelection, computerSelection));
         console.log(gameScore);
     }
 }
