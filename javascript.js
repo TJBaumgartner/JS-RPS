@@ -4,10 +4,10 @@ function getComputerChoice(){
     if(choice == 1){
         computerChoice = 'Rock';
     }
-    else if(choice == 2){
+    if(choice == 2){
         computerChoice = 'Paper';
     }
-    else {
+    if(choice == 3){
         computerChoice = 'Scissors';
     }
     return computerChoice;
@@ -43,73 +43,56 @@ function playRound(playerSelection, computerSelection){
     }
     return result;
 }
-const computerSelection = getComputerChoice();
-function score(){
-    let outcome = playRound(playerSelection, computerSelection);
-    let playerWin = 0;
-    let computerWin = 0;
-    let neitherWin = 0;
-    let gameResult = 0;
-    if(outcome == 'Draw! Rock ties Rock'){
-        neitherWin++;
-    } 
-    if(outcome == 'Draw! Paper ties Paper'){
-        neitherWin++;
-    }  
-    if(outcome == 'Draw! Scissors ties Scissors'){
-        neitherWin++;
-    }   
-    if(outcome = 'You Lose! Scissors beats Paper'){
-        computerWin++;
-    }   
-    if(outcome == 'You Lose! Rock beats Scissors'){
-        computerWin++;
-    }   
-    if(outcome == 'You Lose! Paper beats Rock'){
-        computerWin++;
-    }   
-    if(outcome == 'You win! Scissors beats Paper'){
-        playerWin++;
-    }   
-    if(outcome == 'You win! Rock beats Scissors'){
-        playerWin++;
-    }     
-    if(outcome == 'You Win! Paper beats Rock'){
-        playerWin++;
-    }    
-
-
-    if(playerWin == 1){
-        gameResult = 1;
-    }
-    if(computerWin == 1){
-        gameResult = 2;
-    }
-    if(neitherWin == 1){
-        gameResult = 3;
-    }
-    //let gameScore = ('Your score is '+ scorePlayer + ' wins, ' + gamesTied + ' ties, and ' + scoreComputer + ' losses');
-    return gameResult;
-}
+let computerSelection = getComputerChoice();
 function game(){
     let scorePlayer = 0;
     let scoreComputer = 0;
     let gamesTied = 0;
-    for(var i=1; i<=5; i++){
+    for(var i=1; i<=5; i++){  
+        let computerSelection = getComputerChoice();
         playerSelection = prompt('What do you choose?');
         playRound(playerSelection, computerSelection);
         console.log(playRound(playerSelection, computerSelection));
-        console.log(score());
-        if(score() == 1){
-            scorePlayer++;
-        }
-        if(score() == 2){
+        let outcome = playRound(playerSelection, computerSelection);
+        let gameResult = 0;
+        if(outcome == 'Draw! Rock ties Rock'){
+            gameResult = 3;
+        } 
+        if(outcome == 'Draw! Paper ties Paper'){
+            gameResult = 3;
+        }  
+        if(outcome == 'Draw! Scissors ties Scissors'){
+            gameResult = 3;
+        }   
+        if(outcome == 'You Lose! Scissors beats Paper'){
+            gameResult = 2;
+        }   
+        if(outcome == 'You Lose! Rock beats Scissors'){
+            gameResult = 2;
+        }   
+        if(outcome == 'You Lose! Paper beats Rock'){
+            gameResult = 2;
+        }   
+        if(outcome == 'You win! Scissors beats Paper'){
+            gameResult = 1;
+        }   
+        if(outcome == 'You win! Rock beats Scissors'){
+            gameResult = 1;
+        }     
+        if(outcome == 'You Win! Paper beats Rock'){
+            gameResult = 1;
+        }    
+        if(gameResult == 2){
             scoreComputer++
         }
-        if(score() == 3){
+        if(gameResult == 3){
             gamesTied++;
         }
+        if(gameResult == 1){
+            scorePlayer++;
+        }
         let gameScore = ('Your score is '+ scorePlayer + ' wins, ' + gamesTied + ' ties, and ' + scoreComputer + ' losses');
+        console.log(gameResult);
         console.log(gameScore);
     }
 }
