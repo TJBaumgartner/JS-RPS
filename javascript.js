@@ -1,3 +1,8 @@
+let playerScore = 0;
+let computerScore = 0;
+let playerSelection;
+let computerSelection;
+//Randomize computer Choice
 function getComputerChoice(){
     let computerChoice = '';
     let choice = Math.ceil(Math.random()*3); 
@@ -12,39 +17,54 @@ function getComputerChoice(){
     }
     return computerChoice;
 }
+const button1 = document.getElementById('button1');
+const button2 = document.getElementById('button2');
+const button3 = document.getElementById('button3');
+
+const buttons = Array.from(document.querySelectorAll('button'));
+//Get player Selection
+button1.addEventListener('click', () =>{
+    playerSelection = 'Rock';
+});
+button2.addEventListener('click', () =>{
+    playerSelection = 'Paper';
+});
+button3.addEventListener('click', () =>{
+    playerSelection = 'Scissors';
+});
+//When a button is clicked run the playRound function until someone gets 5 points
+buttons.forEach(button => button.addEventListener('click', () =>{
+    computerSelection = getComputerChoice();
+    playRound(playerSelection, computerSelection);
+
+    if(playerScore ===5 || computerScore ===5){
+        console.log('game over');
+    }
+}));
+
+//Function to play the round
 function playRound(playerSelection, computerSelection){
     let result = '';
-    if(playerSelection.toLowerCase() == 'rock' && computerSelection == 'Rock'){
-        result = 'Draw! Rock ties Rock';
+
+
+    if(playerSelection == computerSelection){
+        result = 'Tie';
     }
-    if(playerSelection.toLowerCase() == 'paper' && computerSelection == 'Rock'){
-        result = 'You Win! Paper beats Rock';
+    if((playerSelection == 'Rock' && computerSelection == 'Scissors') ||
+        (playerSelection == 'Paper' && computerSelection == 'Rock') ||
+        (playerSelection == 'Scissors' && computerSelection == 'Paper')){
+            playerScore++
     }
-    if(playerSelection.toLowerCase() == 'scissors' && computerSelection == 'Rock'){
-        result = 'You Lose! Rock beats Scissors';
+    if((computerSelection == 'Rock' && playerSelection == 'Scissors') ||
+        (computerSelection == 'Paper' && playerSelection == 'Rock') ||
+        (computerSelection == 'Scissors' && playerSelection == 'Paper')){
+            computerScore++
     }
-    if(playerSelection.toLowerCase() == 'rock' && computerSelection == 'Paper'){
-        result = 'You Lose! Paper beats Rock';
-    }
-    if(playerSelection.toLowerCase() == 'paper' && computerSelection == 'Paper'){
-        result = 'Draw! Paper ties Paper';
-    }
-    if(playerSelection.toLowerCase() == 'scissors' && computerSelection == 'Paper'){
-        result = 'You win! Scissors beats Paper';
-    }   
-    if(playerSelection.toLowerCase() == 'rock' && computerSelection == 'Scissors'){
-        result = 'You win! Rock beats Scissors';
-    }
-    if(playerSelection.toLowerCase() == 'paper' && computerSelection == 'Scissors'){
-        result = 'You Lose! Scissors beats Paper';
-    }
-    if(playerSelection.toLowerCase() == 'scissors' && computerSelection == 'Scissors'){
-        result = 'Draw! Scissors ties Scissors';
-    }
-    return result;
 }
-let computerSelection = getComputerChoice();
-function game(){
+
+
+
+/**function game(){
     let scorePlayer = 0;
     let scoreComputer = 0;
     let gamesTied = 0;
@@ -105,4 +125,4 @@ function game(){
         console.log(playRound(playerSelection, computerSelection));
         console.log(gameScore);
     }
-}
+}**/
