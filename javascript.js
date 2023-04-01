@@ -4,6 +4,9 @@ let playerSelection;
 let computerSelection;
 let pScore = document.getElementById("pScore");
 let cScore = document.getElementById("cScore");
+let dialogueContent = document.getElementById("dialogueContent");
+
+
 
 //Randomize computer Choice
 function getComputerChoice(){
@@ -37,18 +40,50 @@ button3.addEventListener('click', () =>{
 });
 //When a button is clicked run the playRound function until someone gets 5 points
 buttons.forEach(button => button.addEventListener('click', () =>{
+    if(playerScore < 5 && computerScore < 5){
     computerSelection = getComputerChoice();
     playRound(playerSelection, computerSelection);
-
+    }
     pScore.textContent = playerScore;
     cScore.textContent = computerScore;
-    
-    if(playerScore ===5 || computerScore ===5){
-        console.log('game over');
+
+
+    //Dialogue for player wins
+    if(playerScore === 1){
+        dialogueContent.textContent ='Nice choice! You won one!';
+    }
+    if(playerScore === 2){
+        dialogueContent.textContent ='One step closer to defeating it!';
+    }
+    if(playerScore === 3){
+        dialogueContent.textContent ='Almost there! Keep it up!';
+    }
+    if(playerScore === 4){
+        dialogueContent.textContent ='One more! Finish it!';
+    }
+
+
+    if(computerScore === 1){
+        dialogueContent.textContent ='It got lucky, try again';
+    }
+    if(computerScore === 2){
+        dialogueContent.textContent ='No big deal, try again';
+    }
+    if(computerScore === 3){
+        dialogueContent.textContent ='You can still come back!';
+    }
+    if(computerScore === 4){
+        dialogueContent.textContent = "Please don't let it win!";
     }
 
 
 
+    if(playerScore ===5){
+        dialogueContent.textContent = 'Game Over! You beat the machine!';
+    }
+    if(computerScore ===5){
+        dialogueContent.textContent = 'Game Over! The machine beat you!';
+    }
 
 }));
 
