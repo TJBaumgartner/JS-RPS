@@ -5,7 +5,7 @@ let computerSelection;
 let pScore = document.getElementById("pScore");
 let cScore = document.getElementById("cScore");
 let dialogueContent = document.getElementById("dialogueContent");
-
+let winner = '';
 
 
 //Randomize computer Choice
@@ -49,32 +49,9 @@ buttons.forEach(button => button.addEventListener('click', () =>{
 
 
     //Dialogue for player wins
-    if(playerScore === 1){
-        dialogueContent.textContent ='Nice choice! You won one!';
-    }
-    if(playerScore === 2){
-        dialogueContent.textContent ='One step closer to defeating it!';
-    }
-    if(playerScore === 3){
-        dialogueContent.textContent ='Almost there! Keep it up!';
-    }
-    if(playerScore === 4){
-        dialogueContent.textContent ='One more! Finish it!';
-    }
+ 
 
 
-    if(computerScore === 1){
-        dialogueContent.textContent ='It got lucky, try again';
-    }
-    if(computerScore === 2){
-        dialogueContent.textContent ='No big deal, try again';
-    }
-    if(computerScore === 3){
-        dialogueContent.textContent ='You can still come back!';
-    }
-    if(computerScore === 4){
-        dialogueContent.textContent = "Please don't let it win!";
-    }
 
 
 
@@ -89,24 +66,60 @@ buttons.forEach(button => button.addEventListener('click', () =>{
 
 //Function to play the round
 function playRound(playerSelection, computerSelection){
-    let result = '';
-
 
     if(playerSelection == computerSelection){
-        result = 'Tie';
+        winner = 'tie'
     }
     if((playerSelection == 'Rock' && computerSelection == 'Scissors') ||
         (playerSelection == 'Paper' && computerSelection == 'Rock') ||
         (playerSelection == 'Scissors' && computerSelection == 'Paper')){
             playerScore++
+            winner = 'player'
+
     }
     if((computerSelection == 'Rock' && playerSelection == 'Scissors') ||
         (computerSelection == 'Paper' && playerSelection == 'Rock') ||
         (computerSelection == 'Scissors' && playerSelection == 'Paper')){
             computerScore++
+            winner = 'computer'
+    }
+    updateResult(winner);
+}
+//Creates Dialogue based on who won
+function updateResult(winner){
+    if(winner === 'tie'){
+        dialogueContent.textContent = 'Tie game.';
+    }
+    if(winner === 'player'){
+        if(playerScore === 1){
+            dialogueContent.textContent ='Nice choice! You won one!';
+        }
+        if(playerScore === 2){
+            dialogueContent.textContent ='One step closer to defeating it!';
+        }
+        if(playerScore === 3){
+            dialogueContent.textContent ='Almost there! Keep it up!';
+        }
+        if(playerScore === 4){
+            dialogueContent.textContent ='One more! Finish it!';
+        }
+    }
+    if(winner === 'computer'){
+        if(computerScore === 1){
+            dialogueContent.textContent ='It got lucky, try again';
+        }
+        if(computerScore === 2){
+            dialogueContent.textContent ='No big deal, try again';
+        }
+        if(computerScore === 3){
+            dialogueContent.textContent = "You're not out yet! Fight back!";
+        }
+        if(computerScore === 4){
+            dialogueContent.textContent = "Please don't let it win!";
+        }
+    
     }
 }
-
 
 
 //NEXT TIME YOU COME BACK TERRENCE MAKE THE UI LOOK GOOD, GAME WORKS!
