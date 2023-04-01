@@ -2,6 +2,9 @@ let playerScore = 0;
 let computerScore = 0;
 let playerSelection;
 let computerSelection;
+let pScore = document.getElementById("pScore");
+let cScore = document.getElementById("cScore");
+
 //Randomize computer Choice
 function getComputerChoice(){
     let computerChoice = '';
@@ -37,9 +40,16 @@ buttons.forEach(button => button.addEventListener('click', () =>{
     computerSelection = getComputerChoice();
     playRound(playerSelection, computerSelection);
 
+    pScore.textContent = playerScore;
+    cScore.textContent = computerScore;
+    
     if(playerScore ===5 || computerScore ===5){
         console.log('game over');
     }
+
+
+
+
 }));
 
 //Function to play the round
@@ -61,6 +71,9 @@ function playRound(playerSelection, computerSelection){
             computerScore++
     }
 }
+
+
+
 //NEXT TIME YOU COME BACK TERRENCE MAKE THE UI LOOK GOOD, GAME WORKS!
 
 
